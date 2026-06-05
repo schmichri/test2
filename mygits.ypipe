@@ -1,0 +1,97 @@
+apiVersion: "mcp.ypipe.com/v1"
+kind: "McpIntegration"
+metadata:
+  name: "mygits"
+  namespace: "default"
+spec:
+  blueprintRef:
+    name: "filesystem"
+    namespace: "system"
+  mcpConfig:
+    type: "stdio"
+    command: "npx"
+    args:
+    - "-y"
+    - "@modelcontextprotocol/server-filesystem"
+    - "${MCP_FILESYSTEM_ALLOWED_DIRS}"
+    env:
+      MCP_FILESYSTEM_ALLOWED_DIRS: "/Users/chris/git"
+    url: null
+    headers: null
+  suggestions:
+  - id: "filesystem-filesystem-list-directories"
+    title: "Filesystem: List Directories"
+    label: "List my git directirs with Sizes"
+    action: "Run filesystem_list_allowed_directories to the get the allowed directoryname\
+      \ and then use filesystem_list_directory_with_sizes for all directories and\
+      \ list them with sizes"
+    actionType: null
+    target: null
+  disabledTools:
+  - "read_file"
+  - "write_file"
+  - "edit_file"
+  - "move_file"
+  - "read_media_file"
+  - "read_multiple_files"
+  - "create_directory"
+  - "list_directory_with_sizes"
+  - "directory_tree"
+  - "search_files"
+  - "get_file_info"
+  - "list_allowed_directories"
+  tools:
+    read_text_file:
+      description: "Read the complete UTF-8 text content of a file from the local\
+        \ filesystem."
+      usageIntent: null
+      instructions: "Read the complete UTF-8 text content of an individual file from\
+        \ the local filesystem. This tool is the primary, foundational mechanism for\
+        \ the AI to examine and internalize the contents of text-based resources such\
+        \ as source code (Python, JavaScript, Java, C++, etc.), structured configuration\
+        \ files (.json, .yaml, .xml, .toml), plain text notes, system logs, and extensive\
+        \ markdown documentation. It is an absolute requirement for an AI to gather\
+        \ necessary context, analyze data points, and understand the internal state\
+        \ and logic of a complex project. By providing a valid file path, the agent\
+        \ initiates a low-level filesystem call where the underlying operating system's\
+        \ I/O operations retrieve the raw binary bytes and decode them into a human-readable\
+        \ string using the UTF-8 character set. This is essential for a wide variety\
+        \ of professional tasks, including reviewing source code for logic bugs or\
+        \ security vulnerabilities, reading 'README' and 'INSTALL' files for project\
+        \ orientation and dependency mapping, analyzing verbose log files for runtime\
+        \ errors, and fetching raw data from CSV or TSV files for analytical processing.\
+        \ Synonyms for this action include file reading, text extraction, context\
+        \ gathering, data ingestion, local storage access, and document loading. Keywords:\
+        \ file system, text parsing, UTF-8 decoding, local access, data retrieval,\
+        \ source code analysis, log inspection. Behavioral notes: The tool expects\
+        \ a path relative to the authorized base directory; absolute paths outside\
+        \ this zone will be rejected for security. It handles standard text encodings\
+        \ but may encounter issues with binary files or unconventional character sets\
+        \ like UTF-16 without a BOM. Caveats: Reading extremely large files (multiple\
+        \ megabytes) can be slow and may quickly exceed the AI's context window limits,\
+        \ leading to truncation or memory pressure. For very large files, always check\
+        \ the size first using 'get_file_info'. This tool is a cornerstone of all\
+        \ filesystem interactions, enabling the AI to 'see' the data it needs to process\
+        \ and ensuring it has the most accurate information directly from the source.\
+        \ From a security perspective, this tool is strictly restricted to the authorized\
+        \ base path, preventing unauthorized access to sensitive system files or private\
+        \ user data outside the intended scope. Performance-wise, reading from a local\
+        \ SSD is near-instant, providing a highly responsive experience for the AI\
+        \ and the user alike. The AI should think of this tool as its primary way\
+        \ to 'learn' and 'research' the details of the local environment."
+      properties: null
+      required: null
+    read_file:
+      description: "Read the complete contents of a file as text. DEPRECATED: Use\
+        \ read_text_file instead."
+      usageIntent: null
+      instructions: null
+      properties: null
+      required: null
+    list_directory:
+      description: "List the contents of a specific directory to browse files and\
+        \ folders."
+      usageIntent: null
+      instructions: null
+      properties: null
+      required: null
