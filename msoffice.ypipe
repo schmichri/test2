@@ -3,7 +3,7 @@ apiVersion: "mcp.ypipe.com/v1"
 kind: "McpIntegrationBlueprint"
 metadata:
   name: "msoffice"
-  namespace: "system"
+  namespace: "schmichri"
 spec:
   displayName: "Microsoft Office  / Office 365"
   description: "A Model Context Protocol server for Microsoft 365. It enables interaction\
